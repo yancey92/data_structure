@@ -26,6 +26,7 @@ public class DoubleLinkedList<E> implements List<E> {
 
     private int size;//链表中元素的个数，不包含虚拟头结点
     private Node dummyHead;//虚拟头结点
+    private Node tail;//尾结点
 
     public DoubleLinkedList() {
         this.size = 0;
@@ -74,6 +75,9 @@ public class DoubleLinkedList<E> implements List<E> {
         if (carryOn != null)
             carryOn.previous = addNode;
         this.size++;
+        if (this.size == 0 || index == this.size - 1) {
+            this.tail = addNode;
+        }
     }
 
     @Override
@@ -110,6 +114,9 @@ public class DoubleLinkedList<E> implements List<E> {
         if (!(0 <= index && index < this.size)) {
             throw new IllegalArgumentException("Find failed. Illegal index.");
         }
+        if (index == this.size - 1) {
+            return this.tail.e;
+        }
         Node tempNode = this.dummyHead;
         for (int i = 0; i <= index; i++) {
             tempNode = tempNode.next;
@@ -141,6 +148,12 @@ public class DoubleLinkedList<E> implements List<E> {
         removeNode.next = null;
         removeNode.previous = null;
         this.size--;
+        //如果影响到了tail就做相应调整
+        if (index == size - 1 && index == 0) {
+            this.tail = null;
+        } else if (index == size - 1) {
+            this.tail = previous;
+        }
         return removeNode.e;
     }
 
@@ -166,6 +179,13 @@ public class DoubleLinkedList<E> implements List<E> {
         Node temp = this.dummyHead.next;
         while (temp != null) {
             if (temp.e.equals(e)) {
+                // 维护一下tail结点
+                if (temp.equals(tail) && temp.previous.equals(this.dummyHead)) {
+                    this.tail = null;
+                } else if (temp.next == null) { //如果移除的结点的下一个结点是null，说明移除的结点是尾结点
+                    this.tail = temp.previous;
+                }
+                //删除元素
                 Node removeNode = temp;
                 Node previous = removeNode.previous;
                 Node carryOn = removeNode.next;
@@ -176,6 +196,7 @@ public class DoubleLinkedList<E> implements List<E> {
                 removeNode.previous = null;
                 removeNode.next = null;
                 this.size--;
+
                 break;
             }
             temp = temp.next;
@@ -187,9 +208,17 @@ public class DoubleLinkedList<E> implements List<E> {
         StringBuilder sb = new StringBuilder();
         Node temp = this.dummyHead.next;
         while (temp != null) {
+//            System.out.print(temp.previous.e);
+//            System.out.print(temp.e);
+//            if (temp.next != null) {
+//                System.out.print(temp.next.e);
+//            } else {
+//                System.out.print("NULL");
+//            }
+//            System.out.println("\n");
             sb.append(temp.e);
             temp = temp.next;
-            sb.append("->");
+            sb.append("<->");
 
         }
         sb.append("NULL");
@@ -206,6 +235,6 @@ public class DoubleLinkedList<E> implements List<E> {
             }
         }
         System.out.println(list);
-        System.out.println(list.contains(3));
+        System.out.println(list.getLast());
     }
 }

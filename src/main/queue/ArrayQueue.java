@@ -11,10 +11,10 @@ import main.list.ArrayList;
  */
 public class ArrayQueue<E> implements Queue<E> {
 
-    private ArrayList<E> arrayList;
+    private ArrayList<E> data;
 
     public ArrayQueue(int capacity) {
-        arrayList = new ArrayList<>(capacity);
+        data = new ArrayList<>(capacity);
     }
 
     public ArrayQueue() {
@@ -23,21 +23,21 @@ public class ArrayQueue<E> implements Queue<E> {
 
     @Override
     public int getSize() {
-        return this.arrayList.getSize();
+        return this.data.getSize();
     }
 
     private int getCapacity() {
-        return this.arrayList.getCapacity();
+        return this.data.getCapacity();
     }
 
     @Override
     public boolean isEmpty() {
-        return this.arrayList.isEmpty();
+        return this.data.isEmpty();
     }
 
     @Override
     public void enqueue(E e) {
-        this.arrayList.addLast(e);
+        this.data.addLast(e);
     }
 
     @Override
@@ -45,14 +45,14 @@ public class ArrayQueue<E> implements Queue<E> {
         if (isEmpty()) {
             throw new IllegalArgumentException("Cannot dequeue from an empty queue.");
         }
-        return this.arrayList.removeFirst();
+        return this.data.removeFirst();
     }
 
     @Override
     public E getFront() {
         if (isEmpty())
             throw new IllegalArgumentException("Queue is empty.");
-        return this.arrayList.getFirst();
+        return this.data.getFirst();
     }
 
 
@@ -65,7 +65,7 @@ public class ArrayQueue<E> implements Queue<E> {
             if (i != 0) {
                 sb.append(",");
             }
-            sb.append(this.arrayList.get(i));
+            sb.append(this.data.get(i));
         }
         sb.append("] tail");
         return sb.toString();

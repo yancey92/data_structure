@@ -9,39 +9,39 @@ import main.list.ArrayList;
  */
 public class ArrayStack<E> implements Stack<E> {
 
-    private ArrayList<E> arrayList;
+    private ArrayList<E> data;
 
     public ArrayStack(int capacity) {
-        arrayList = new ArrayList<>(capacity);
+        data = new ArrayList<>(capacity);
     }
 
     public ArrayStack() {
-        arrayList = new ArrayList<>();
+        data = new ArrayList<>();
     }
 
     @Override
     public int getSize() {
-        return this.arrayList.getSize();
+        return this.data.getSize();
     }
 
     @Override
     public boolean isEmpty() {
-        return this.arrayList.isEmpty();
+        return this.data.isEmpty();
     }
 
     @Override
     public void push(E e) {
-        this.arrayList.addLast(e);
+        this.data.addLast(e);
     }
 
     @Override
     public E pop() {
-        return this.arrayList.removeLast();
+        return this.data.removeLast();
     }
 
     @Override
     public E peek() {
-        return this.arrayList.getLast();
+        return this.data.getLast();
     }
 
     @Override
@@ -49,9 +49,9 @@ public class ArrayStack<E> implements Stack<E> {
         StringBuilder res = new StringBuilder();
         res.append("Stack: ");
         res.append('[');
-        for (int i = 0; i < arrayList.getSize(); i++) {
-            res.append(arrayList.get(i));
-            if (i != arrayList.getSize() - 1)
+        for (int i = 0; i < data.getSize(); i++) {
+            res.append(data.get(i));
+            if (i != data.getSize() - 1)
                 res.append(", ");
         }
         res.append("] top");
@@ -66,7 +66,7 @@ public class ArrayStack<E> implements Stack<E> {
             stack.push(i);
             System.out.println(stack);
         }
-        
+
         stack.pop();
         System.out.println(stack);
     }

@@ -1,8 +1,7 @@
 package main.list;
 
 /**
- * 单项链表实现：dummyHead->1->3->5->7->9->11->13->15->17->19->21->23->25->27->29->NULL
- * 需要借助一个虚拟头节点dummyHead，此节点不对外暴露
+ * 单项链表实现：1->3->5->7->9->11->13->15->17->19->21->23->25->27->29->NULL
  *
  * @param <E>
  */
@@ -22,7 +21,7 @@ public class SingleLinkedList<E> implements List<E> {
         }
     }
 
-    private int size;//链表中元素的个数，不包含虚拟头结点
+    private int size;//链表中元素的个数
     private Node dummyHead;//虚拟头结点
 
     public SingleLinkedList() {
@@ -64,6 +63,7 @@ public class SingleLinkedList<E> implements List<E> {
         for (int i = 0; i < index; i++) {
             tempNode = tempNode.next;
         }
+        //tempNode为index的前驱
         tempNode.next = new Node(e, tempNode.next);
         this.size++;
     }
@@ -118,12 +118,12 @@ public class SingleLinkedList<E> implements List<E> {
         if (!(0 <= index && index < this.size)) {
             throw new IllegalArgumentException(" Illegal index.");
         }
-        Node beforeNode = this.dummyHead;
+        Node previous = this.dummyHead;
         for (int i = 0; i < index; i++) {
-            beforeNode = beforeNode.next;
+            previous = previous.next;
         }
-        Node removeNode = beforeNode.next;
-        beforeNode.next = removeNode.next;
+        Node removeNode = previous.next;
+        previous.next = removeNode.next;
         removeNode.next = null;
         this.size--;
         return removeNode.e;
@@ -186,7 +186,8 @@ public class SingleLinkedList<E> implements List<E> {
             }
         }
         System.out.println(list);
-        System.out.println(list.contains(3));
+        System.out.println(list.getFirst());
+        System.out.println(list.getLast());
 
     }
 }
