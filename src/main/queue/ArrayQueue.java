@@ -71,22 +71,4 @@ public class ArrayQueue<E> implements Queue<E> {
         return sb.toString();
     }
 
-    public static void main(String[] args) {
-        Queue<Integer> queue = new ArrayQueue<>();
-        for (int i = 0; i < 100; i++) {
-            queue.enqueue(i);
-        }
-
-        for (int i = 0; i < 70; i++) {
-            queue.dequeue();
-        }
-
-        for (int i = 0; i < 13; i++) {
-            queue.enqueue(i);
-        }
-        for (int i = 0; i < 7; i++) {
-            queue.dequeue();
-        }
-        System.out.println(queue);
-    }
 }

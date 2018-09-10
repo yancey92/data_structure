@@ -63,21 +63,27 @@ public class DoubleLinkedList<E> implements List<E> {
         if (!(0 <= index && index <= this.size)) {
             throw new IllegalArgumentException("Add failed. Illegal index.");
         }
-        Node previous = this.dummyHead;
-        for (int i = 0; i < index; i++) {
-            previous = previous.next;
+        if (index > 0 && index == this.size) {
+            Node previous = this.tail;
+            this.tail = new Node(e, this.tail, null);
+            previous.next = this.tail;
+        } else {
+            Node previous = this.dummyHead;
+            for (int i = 0; i < index; i++) {
+                previous = previous.next;
+            }
+            Node carryOn = previous.next;
+            //previous为要插入index位置的前驱,previous的后继此时应该成为addNode的后继
+            Node addNode = new Node(e, previous, carryOn);
+            previous.next = addNode;
+            //插入节点此时要变成之前该位置节点的前驱
+            if (carryOn != null)
+                carryOn.previous = addNode;
+            if (size == 0) {
+                this.tail = addNode;
+            }
         }
-        Node carryOn = previous.next;
-        //previous为要插入index位置的前驱,previous的后继此时应该成为addNode的后继
-        Node addNode = new Node(e, previous, carryOn);
-        previous.next = addNode;
-        //插入节点此时要变成之前该位置节点的前驱
-        if (carryOn != null)
-            carryOn.previous = addNode;
         this.size++;
-        if (this.size == 0 || index == this.size - 1) {
-            this.tail = addNode;
-        }
     }
 
     @Override
