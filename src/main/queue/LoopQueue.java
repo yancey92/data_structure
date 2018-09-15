@@ -22,6 +22,9 @@ public class LoopQueue<E> implements Queue<E> {
 
     //创建一个具有初始容量的数组
     public LoopQueue(int capacity) {
+        if (capacity <= 0) {
+            throw new IllegalArgumentException("Cannot make a queue uses capacity<=0.");
+        }
         //对于用户来说队列的容量是capacity，对于实现来说，要增加一个空位
         data = (E[]) new Object[capacity + 1];
         front = 0;
@@ -45,6 +48,7 @@ public class LoopQueue<E> implements Queue<E> {
         }
     }
 
+    //队列的容量
     private int getCapacity() {
         return this.data.length - 1;
     }
@@ -137,7 +141,7 @@ public class LoopQueue<E> implements Queue<E> {
     }
 
     public static void main(String[] args) {
-        LoopQueue<Integer> queue = new LoopQueue<>();
+        LoopQueue<Integer> queue = new LoopQueue<>(1);
         for (int i = 0; i < 10; i++) {
             queue.enqueue(i);
             System.out.println(queue);
