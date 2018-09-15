@@ -9,7 +9,6 @@ import main.tree.BST;
  */
 public class BSTSet<E extends Comparable<E>> implements Set<E> {
     private BST<E> data;
-    private int size;
 
     public BSTSet() {
         this.data = new BST<E>();
@@ -17,7 +16,7 @@ public class BSTSet<E extends Comparable<E>> implements Set<E> {
 
     @Override
     public int getSize() {
-        return this.size;
+        return this.data.getSize();
     }
 
     @Override
