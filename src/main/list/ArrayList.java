@@ -2,8 +2,8 @@ package main.list;
 
 /**
  * 动态数组，可伸缩
- * 数组中元素对应的索引：[0][1][2][3][4][5]
- * 数组中的元素排放：   [a][b][c][d][][][]
+ * 数组中元素对应的索引： 0  1  2  3  4  5  6
+ * 数组中的元素排放：   [a][b][c][d][ ][ ][ ]
  *
  * @param <E>
  * @author yangxinxin_mail@163.com
@@ -41,6 +41,15 @@ public class ArrayList<E> implements List<E> {
         return this.size == 0;
     }
 
+    public void swap(int i, int j) {
+        if (i < 0 || i >= size || j < 0 || j >= size)
+            throw new IllegalArgumentException("Index is illegal.");
+
+        E t = data[i];
+        data[i] = data[j];
+        data[j] = t;
+    }
+
     //获取index索引位置的元素
     @Override
     public E get(int index) {
@@ -71,6 +80,7 @@ public class ArrayList<E> implements List<E> {
     }
 
     //数组中是否包含元素e
+    @Override
     public boolean contains(E e) {
         for (int i = 0; i < this.size; i++) {
             if (data[i].equals(e)) {
