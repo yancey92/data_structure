@@ -1,4 +1,4 @@
-package main.set_map;
+package main.set;
 
 import main.list.SingleLinkedList;
 

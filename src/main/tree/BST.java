@@ -12,6 +12,9 @@ import main.queue.Queue;
  * ------      2     6   9    12
  * -------    / \       / \
  * -------   1   3     8   10
+ * <p>
+ * 像这样的二分搜索树，如果有一串数字，是近乎有序的，那么插入到这棵二分搜索树中后，这棵树将会是极度倾斜的，
+ * 在极端情况下，二分搜索树将会变成链表
  *
  * @param <E>
  */
@@ -204,7 +207,6 @@ public class BST<E extends Comparable<E>> {
         return mininum(node.left);
     }
 
-
     /**
      * 寻找二分搜索树中最大元素，也就是从根节点出发，查找最右侧的节点
      *
@@ -324,7 +326,7 @@ public class BST<E extends Comparable<E>> {
                 size--;
                 return leftNode;
             }
-            //如果要删除的节点的左右子树都不为空
+            //如果要删除的节点的左右子树都不为空，需要找到要删除的节点的右子树中最小的节点替换掉要删除的节点
             Node miniRight = mininum(node.right);
 
             miniRight.right = removeMin(node.right);

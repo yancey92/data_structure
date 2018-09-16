@@ -1,9 +1,10 @@
-package main.set_map;
+package main.set;
 
 import main.tree.BST;
 
 /**
  * 基于二分搜索树实现一个Set集合
+ * 由于使用的二分搜索树BST本身在设计的时候不会出现重复元素出现，所以直接拿来使用
  *
  * @param <E>
  */
