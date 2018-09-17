@@ -100,21 +100,20 @@ public class MaxHeap<E extends Comparable<E>> {
     }
 
     private void siftDown(int index) {
-        // 要下沉的节点和他的左右孩子比较，如果父亲节点分别>=左右孩子，此时不做下沉；
+        // 要下沉的节点和他的左右孩子比较，如果父亲节点 >= 左右孩子，此时不做下沉；
         // 否则找到最大的那个节点和父亲节点交换位置
-
         while (leftChildIndex(index) < data.getSize()) {
-            int j = leftChildIndex(index); // 在此轮循环中,data[k]和data[j]交换位置
+            int j = leftChildIndex(index);
             if (j + 1 < data.getSize() &&
                     data.get(j + 1).compareTo(data.get(j)) > 0)
                 j++;
-            // data[j] 是 leftChild 和 rightChild 中的最大值
-
-            if (data.get(index).compareTo(data.get(j)) >= 0)
+            //接下来j节点的位置和index节点的位置作对比，如果index位置的元素大于j节点位置的元素，下沉结束
+            if (data.get(index).compareTo(data.get(j)) >= 0) {
                 break;
-
-            data.swap(index, j);
-            index = j;
+            } else {
+                data.swap(index, j);
+                index = j;
+            }
         }
     }
 
@@ -125,4 +124,5 @@ public class MaxHeap<E extends Comparable<E>> {
         siftDown(0);
         return ret;
     }
+
 }

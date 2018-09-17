@@ -179,17 +179,4 @@ public class SingleLinkedList<E> implements List<E> {
     }
 
 
-    public static void main(String[] args) {
-        List<Integer> list = new SingleLinkedList<>();
-        for (int i = 0; i < 30; i++) {
-            list.addLast(i);
-            if (i % 2 == 0) {
-                list.removeElement(i);
-            }
-        }
-        System.out.println(list);
-        System.out.println(list.getFirst());
-        System.out.println(list.getLast());
-
-    }
 }

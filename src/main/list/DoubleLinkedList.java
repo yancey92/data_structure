@@ -233,15 +233,4 @@ public class DoubleLinkedList<E> implements List<E> {
     }
 
 
-    public static void main(String[] args) {
-        List<Integer> list = new DoubleLinkedList<>();
-        for (int i = 0; i < 20; i++) {
-            list.addLast(i);
-            if (i % 3 == 0) {
-                list.removeElement(i);
-            }
-        }
-        System.out.println(list);
-        System.out.println(list.getLast());
-    }
 }
